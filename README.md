@@ -8,13 +8,12 @@ VMAP, VAST VRiX
 ## Features
 
 - [x] VMAP, VAST supported.
-- [x] Preroll, Midroll, Postroll 광고 지원
-- [x] linear, nonlinear 지원
+- [x] Preroll 광고 지원
 
 ## Requirements
 
-- iOS 8.0+
-- Xcode 8.3
+- Android API 17+
+- Installed "Google Play Service"
 
 ## Installation
 
@@ -181,7 +180,7 @@ completionHandler:(void (^)(void))handler;
 ```
 ## License
 
-Gomcorp – (https://www.gomcorp.com/) – kuyoungchang@gomcorp.com
+Gomcorp – (https://www.gomcorp.com/) – pjm3019@gomcorp.com
 
 Copyright © 2017 Gomcorp.
 
