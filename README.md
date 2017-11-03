@@ -22,12 +22,13 @@ VMAP, VAST VRiX
 2. add dependencies in your app.gradle
 
 dependencies{
+
 ....
+
     compile 'com.google.android.gms:play-services-ads:10.2.0'
     implementation files('libs/androidvrixlib.jar')
     compile 'com.github.bumptech.glide:glide:3.7.0'
 ...
-
 }
 
 
