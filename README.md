@@ -20,6 +20,7 @@ VMAP, VAST VRiX
 #### Manually
 1. Download and drop ```androidvrixlib.jar``` in your project libs folder.  
 2. add dependencies in your app.gradle
+
 dependencies{
 .
 .
