@@ -18,8 +18,20 @@ VMAP, VAST VRiX
 ## Installation
 
 #### Manually
-1. Download and drop ```VRiX.framework``` in your project.  
-2. Project > Build settings > Other linker flasg '''-Objc''' '''-all_load'''  
+1. Download and drop ```androidvrixlib.jar``` in your project libs folder.  
+2. add dependencies in your app.gradle
+dependencies{
+.
+.
+.
+    compile 'com.google.android.gms:play-services-ads:10.2.0'
+    implementation files('libs/androidvrixlib.jar')
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+.
+.
+.
+}
+
 
 ## Usage example
 
