@@ -36,7 +36,7 @@ dependencies{
 ## Usage example
 
 #### init
-
+```objc
 private init(){
 setOsInfo();                    //  infomations of OS
 checkGooglePlayServices();      //  extraction of ADID
