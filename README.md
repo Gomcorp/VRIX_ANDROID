@@ -37,72 +37,38 @@ dependencies{
 
 #### init
 ```objc
-private init(){
+private init(Context context){
+this.context = context;
 setOsInfo();                    //  infomations of OS
 checkGooglePlayServices();      //  extraction of ADID
 }
 
 ```
-#### Play AD
-1. Preroll & OutStream
+#### Fetch
+1. FetchVrix
 
 ```objc
-- (void) playPreroll
-{
-    NSInteger numberOfPreroll = [_vrixMananger prerollCount];
-    if (numberOfPreroll > 0){
-        // Play Preroll
-        [_vrixMananger prerollAtView:_adView completionHandler:^{
-            //TODO: preroll광고 끝난후에 처리할 내용을 구현
-        }];
+public static void fetchVRiX(String url, ReturnCompletionListener listener) {
+
+        if (context == null)  {
+            return;
+        }
+
+        if (player != null) {
+            player = null;
+        }
+
+        player = new VastPlayerHandler(context);
+        player.requestVrix(url, listener);
     }
-}
 ```
-2. Midroll
+2. Preroll
 ```objc
-- (void) playMidroll
-{
-    CGFloat currentTime = CMTimeGetSeconds(_player.currentTime);
-
-    //vrix midroll handling
-    if([_vrixMananger midrollCount] > 0){
-        // Play Midroll
-        [_vrixMananger midrollAtView:_adView
-                          timeOffset:currentTime
-                     progressHandler:^(BOOL start, GXAdBreakType breakType, NSAttributedString *message){
-                            //
-                            if (message != nil && breakType == GXAdBreakTypelinear){
-                                //TODO: show message
-                            }
-
-                            if (start == YES){
-                                //TODO: 광고가 시작되었을때 처리
-                            }
-                
-                    }
-                    completionHandler:^(GXAdBreakType breakType){
-                            //TODO: midroll광고가 완료되었때 처리 
-                    }];
-                }
-        }];
+public static void prerollAtView(ViewGroup view, CompletionListener listener) {
+        if (player != null) {
+            player.prerollAtView(view, listener);
+        }
     }
-}
-```
-
-3. Postroll
-```objc
-- (void) playpostroll
-{
-    NSInteger numberOfPostroll = [_vrixMananger postrollCount];
-    if (numberOfPostroll > 0){
-        [_vrixMananger postrollAtView:_adView completionHandler:^{
-            //TODO:postroll광고 끝난후에 처리할 내용을 구현
-        }];
-}
-```
-4. Stop AD
-```objc
-[self.vrixMananger stopCurrentAD];
 ```
 
 #### VRiX Handling methods
