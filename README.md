@@ -36,23 +36,12 @@ dependencies{
 ## Usage example
 
 #### init
-```objc
-#import <VRiX/VRiXManager.h>
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.vrixMananger = [[VRiXManager alloc] initWithKey:VRIX_KEY hashKey:VRIX_HASHKEY];
-
-    [self.vrixMananger fetchVRiX:[NSURL URLWithString:encodedUrl]
-               completionHandler:^(BOOL success, NSError *error){
-                    //
-                    if (success == YES){
-                        [self playPreroll];
-                    }else{
-                        //TODO: error handler
-                    }
-                }];
+private init(){
+setOsInfo();                    //  infomations of OS
+checkGooglePlayServices();      //  extraction of ADID
 }
+
 ```
 #### Play AD
 1. Preroll & OutStream
