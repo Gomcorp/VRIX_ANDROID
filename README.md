@@ -77,15 +77,7 @@ public static void prerollAtView(ViewGroup view, CompletionListener listener) {
 
 #### VRiX Handling methods
 ```objc
-/*!
-@method			initWithKey:hashKey:
-@param          key 사용자별 키값
-@param			hashKey 사용자별 시크릿 키값
-@discussion		브릭스를 핸들링가능한 메니져를 init한다.
-*/
-- (VRiXManager *) initWithKey:(NSString *)key hashKey:(NSString *)hashKey;
 
-/*!
 @method			fetchVRiX:completionHandler:
 @param				url VRiX주소
 @param				handler fetch 완료 호출될 block
@@ -106,48 +98,14 @@ completionHandler:(void (^)(BOOL success, NSError *error))handler;
 @param				handler 광고재생 완료 후 호출될 block
 @discussion		프리롤 광고를 해당뷰에 재생시킨다.
 */
-- (void) prerollAtView:(UIView *)targetView
-completionHandler:(void (^)(void))handler;
+- (void) prerollAtView(ViewGroup view, CompletionListener listener)
 
 /*!
 @method			prerollCount
 @discussion		프리롤광고의 곗수를 리턴한다.
 */
-- (NSInteger) prerollCount;
+- (int) prerollCount;
 
-/*!
-@method			midrollAtView:timeOffset:progressHandler:completionHandler
-@param				targetView 광고가 재생될 뷰
-@param             offset 현재 재생중인 컨텐츠의 재생시간
-@param             progressHandler timeOffset에 따른 결과값 block 코드
-@param				completionHandler 광고재생 완료 후 호출될 block
-@discussion		미드롤 광고를 해당뷰에 재생한다.
-*/
-- (void) midrollAtView:(UIView *)targetView
-timeOffset:(NSTimeInterval)offset
-progressHandler:(void (^)(BOOL whenItStart, GXAdBreakType breakType, NSAttributedString *message))progressHandler
-completionHandler:(void (^)(GXAdBreakType breakType))completionHandler;
-
-/*!
-@method			midrollCount
-@discussion		미드롤광고의 곗수를 리턴한다.
-*/
-- (NSInteger) midrollCount;
-
-/*!
-@method			postrollAtView:completionHandler
-@param				targetView 광고가 재생될 뷰
-@param				handler 광고재생 완료 후 호출될 block
-@discussion		포스트롤 광고를 해당뷰에 재생시킨다.
-*/
-- (void) postrollAtView:(UIView *)targetView
-completionHandler:(void (^)(void))handler;
-
-/*!
-@method			postrollCount
-@discussion		포스트롤광고의 곗수를 리턴한다.
-*/
-- (NSInteger) postrollCount;
 ```
 ## License
 
