@@ -1,7 +1,7 @@
 package vrix.gomandcorp.com.myapplicationtest;
 
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -11,12 +11,12 @@ import com.gomcorp.vrixlib.VrixManager;
 import com.gomcorp.vrixlib.player.listener.CompletionListener;
 import com.gomcorp.vrixlib.player.listener.ReturnCompletionListener;
 
-
 public class MainActivity extends AppCompatActivity {
 
     private VrixManager vrixManager;
     private FrameLayout player;
     private Button start;
+    private Button stop;
 
     private String VRIX_URL = "http://183.110.11.246/vast_ads.vrix?vcode=vmap|33|C1|100|1000|7447|";
 
@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         player = (FrameLayout) findViewById(R.id.player);
         start = (Button) findViewById(R.id.start);
+        stop = (Button) findViewById(R.id.stop);
 
         start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
                         Log.e("VRIX", "preroll fail");
                     }
                 });
+            }
+        });
+        stop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                vrixManager.stopCurrentAD();
             }
         });
     }
