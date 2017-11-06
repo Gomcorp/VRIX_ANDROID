@@ -83,8 +83,7 @@ public static void prerollAtView(ViewGroup view, CompletionListener listener) {
 @param				handler fetch 완료 호출될 block
 @discussion		브릭스서비스에서 광고 정보를 fetch한다..
 */
-- (void) fetchVRiX:(NSURL *)url
-completionHandler:(void (^)(BOOL success, NSError *error))handler;
+- (void) fetchVRiX(String url, ReturnCompletionListener listener)
 
 /*!
 @method			stopCurrentAD
