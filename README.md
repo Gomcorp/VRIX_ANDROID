@@ -32,6 +32,10 @@ dependencies{
 
 }
 
+3. add permission in your AndroidManifest.xml
+```objc
+<uses-permission android:name="android.permission.INTERNET" />
+```
 
 ## Usage example
 
