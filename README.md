@@ -37,6 +37,9 @@ dependencies{
 <uses-permission android:name="android.permission.INTERNET" />
 ```
 
+## Sample APK Location
+https://www.dropbox.com/s/7gplyov91e20n3g/AndroidVrix_20171107.apk?dl=0
+
 ## Usage example
 
 #### init
