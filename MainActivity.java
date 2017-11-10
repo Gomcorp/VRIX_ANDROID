@@ -1,69 +1,53 @@
 package vrix.gomandcorp.com.myapplicationtest;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.gomcorp.vrixlib.VrixManager;
 import com.gomcorp.vrixlib.player.listener.CompletionListener;
-import com.gomcorp.vrixlib.player.listener.ReturnCompletionListener;
 
-public class MainActivity extends AppCompatActivity {
+/**
+ * Created by GRE543 on 2017-11-09.
+ */
+
+public class MainActivity_2  extends AppCompatActivity {
 
     private VrixManager vrixManager;
     private FrameLayout player;
     private Button start;
-    private Button stop;
 
-    private String VRIX_URL = "http://183.110.11.246/vast_ads.vrix?vcode=vmap|33|C1|100|1000|7447|";
+    private String VRIX_URL = "http://devads.vrixon.com/vast/vmap.vrix?ctime=3806&invenid=C1&cate1=110&cate2=1000&cate3=2001@2005@2012@2990&broadcast=512&contentid=14366036&seriesid=14207064&gender=0&age=0&param=\n";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        vrixManager = new VrixManager();
-        vrixManager.init(this);
-
-        vrixManager.fetchVRiX(VRIX_URL, new ReturnCompletionListener() {
-            @Override
-            public void onSuccess() {
-                Log.e("VRIX", "vmap parser success");
-            }
-
-            @Override
-            public void onFail(String error) {
-                Log.e("VRIX", "vmap parser fail : " + error);
-            }
-        });
+        setContentView(R.layout.activity_main_2);
 
         player = (FrameLayout) findViewById(R.id.player);
         start = (Button) findViewById(R.id.start);
-        stop = (Button) findViewById(R.id.stop);
 
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                vrixManager.prerollAtView(player, new CompletionListener() {
-                    @Override
-                    public void onSuccess() {
-                        Log.e("VRIX", "preroll success");
-                    }
+                vrixManager = new VrixManager();
 
-                    @Override
-                    public void onFail() {
-                        Log.e("VRIX", "preroll fail");
-                    }
-                });
-            }
-        });
-        stop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                vrixManager.stopCurrentAD();
+                if (vrixManager != null) {
+                    vrixManager.init(getApplicationContext(), VRIX_URL, player, new CompletionListener() {
+                        @Override
+                        public void onSuccess() {
+                            //TODO Preroll 완료 후 동작
+
+                        }
+
+                        @Override
+                        public void onFail() {
+                            //TODO Preroll 실패 후 동작
+                        }
+                    });
+                }
             }
         });
     }
@@ -74,6 +58,14 @@ public class MainActivity extends AppCompatActivity {
         if (vrixManager != null) {
             vrixManager.stopCurrentAD();
             vrixManager = null;
+        }
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (vrixManager != null) {
+            // app을 벗어났다가 돌아왔을경우
+            vrixManager.resume();
         }
     }
 }
