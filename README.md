@@ -38,38 +38,12 @@ dependencies{
 ```
 
 ## Sample APK Location
-https://www.dropbox.com/s/7gplyov91e20n3g/AndroidVrix_20171107.apk?dl=0
+https://www.dropbox.com/s/0kkv7w1w2qf2920/AndroidVrix_20171110.apk?dl=0
 
 ## Usage example
 
-#### init
-```objc
-private init(Context context){
-this.context = context;
-setOsInfo();                    //  infomations of OS
-checkGooglePlayServices();      //  extraction of ADID
-}
 
-```
-#### Fetch
-1. FetchVrix
-
-```objc
-public static void fetchVRiX(String url, ReturnCompletionListener listener) {
-
-        if (context == null)  {
-            return;
-        }
-
-        if (player != null) {
-            player = null;
-        }
-
-        player = new VastPlayerHandler(context);
-        player.requestVrix(url, listener);
-    }
-```
-2. Preroll
+1. Preroll
 ```objc
 public static void prerollAtView(ViewGroup view, CompletionListener listener) {
         if (player != null) {
