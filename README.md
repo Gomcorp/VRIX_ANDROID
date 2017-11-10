@@ -111,12 +111,14 @@ https://www.dropbox.com/s/0kkv7w1w2qf2920/AndroidVrix_20171110.apk?dl=0
 ```objc
 
 /*!
-@method			prerollAtView:completionHandler
+@method			prerollAtView
+@param				context
+@param				vrix_url
 @param				targetView 광고가 재생될 뷰
-@param				handler 광고재생 완료 후 호출될 block
+@param				handler 광고재생 완료 후 호출될 콜백함수
 @discussion		프리롤 광고를 해당뷰에 재생시킨다.
 */
-- (void) prerollAtView(ViewGroup view, CompletionListener listener)
+- (void) prerollAtView(Context context,String url, ViewGroup view, CompletionListener listener)
 
 /*!
 @method			stopCurrentAD
