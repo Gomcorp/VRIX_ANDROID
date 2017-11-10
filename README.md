@@ -41,32 +41,74 @@ dependencies{
 https://www.dropbox.com/s/0kkv7w1w2qf2920/AndroidVrix_20171110.apk?dl=0
 
 ## Usage example
-
-
-1. Preroll
 ```objc
-public static void prerollAtView(ViewGroup view, CompletionListener listener) {
-        if (player != null) {
-            player.prerollAtView(view, listener);
+@Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sample);
+
+        player = (FrameLayout) findViewById(R.id.player);
+        start = (Button) findViewById(R.id.start);
+        
+        .
+        .
+        .
+
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                vrixManager = new VrixManager();
+
+                if (vrixManager != null) {
+                    vrixManager.prerollAtView(getApplicationContext(), VRIX_URL, player, new CompletionListener() {
+                        @Override
+                        public void onSuccess() {
+                            //TODO Preroll 완료 후 동작
+
+                        }
+
+                        @Override
+                        public void onFail() {
+                            //TODO Preroll 실패 후 동작
+                        }
+                    });
+                }
+            }
+        });
+        .
+        .
+        .
+        .
+        
+    }
+    
+    .
+    .
+    .
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (vrixManager != null) {
+            vrixManager.stopCurrentAD();
+            vrixManager = null;
         }
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (vrixManager != null) {
+            // app을 벗어났다가 돌아왔을경우
+            vrixManager.resume();
+        }
+    }
+    .
+    .
+    .
+
 ```
 
 #### VRiX Handling methods
 ```objc
-
-@method			fetchVRiX:completionHandler:
-@param				url VRiX주소
-@param				handler fetch 완료 호출될 block
-@discussion		브릭스서비스에서 광고 정보를 fetch한다..
-*/
-- (void) fetchVRiX(String url, ReturnCompletionListener listener)
-
-/*!
-@method			stopCurrentAD
-@discussion		현재 재생중인 광고를 중지 시킨다.
-*/
-- (void) stopCurrentAD;
 
 /*!
 @method			prerollAtView:completionHandler
@@ -75,6 +117,12 @@ public static void prerollAtView(ViewGroup view, CompletionListener listener) {
 @discussion		프리롤 광고를 해당뷰에 재생시킨다.
 */
 - (void) prerollAtView(ViewGroup view, CompletionListener listener)
+
+/*!
+@method			stopCurrentAD
+@discussion		현재 재생중인 광고를 중지 시킨다.
+*/
+- (void) stopCurrentAD;
 
 /*!
 @method			prerollCount
