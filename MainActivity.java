@@ -9,10 +9,6 @@ import android.widget.FrameLayout;
 import com.gomcorp.vrixlib.VrixManager;
 import com.gomcorp.vrixlib.player.listener.CompletionListener;
 
-/**
- * Created by GRE543 on 2017-11-09.
- */
-
 public class MainActivity_2  extends AppCompatActivity {
 
     private VrixManager vrixManager;
