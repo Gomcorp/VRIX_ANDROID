@@ -1,52 +1,34 @@
-# VRIX_ANDROID
+package com.gomcorp.vrix.sample;
 
-## Features
-- VMAP, VAST supported.
-- Preroll 광고 지원
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
-## Requirements
+import com.gomcorp.vrix.android.CompletionListener;
+import com.gomcorp.vrix.android.VrixManager;
 
-- Android API 17+
-- Installed "Google Play Service"
-
-## Installation
-1. Add repository in your build.gradle on project-level
-```groovy
-    allprojects {
-        repositories {
-            maven {
-                url  "https://dl.bintray.com/gomcorp/maven/"
-            }
-        }
-    }
-```
-
-2. Add dependency in your build.gradle on module-level
-```groovy
-    dependencies {
-        implementation ('com.gomcorp.vrix.android:vrix:1.0.1@aar') {
-            transitive = true
-        }
-    }
-```
-
-3. Add permission in your AndroidManifest.xml
-```
-<uses-permission android:name="android.permission.INTERNET" />
-```
-
-## Usage example
-```java
 public class SampleActivity extends AppCompatActivity {
 
-    private ViewGroup pnlPlayer;
     private VrixManager vrixManager;
+    private ViewGroup pnlPlayer;
+    private View progress;
+    private View btnStart;
+
+    private static final String VRIX_URL = "http://ads.vrixon.com/vast/vast.vrix?invenid=KHLOC";
+//    private static final String VRIX_URL = "http://ads.vrixon.com/vast/vast.vrix?invenid=PEFOC";  //광고가 없는경우
+//    private static final String VRIX_URL = "http://ads.vrixon.com/vast/vast.vrix?invenid=XXXXXX";  // 잘못된 URL
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sample);
-        ....
+
+        pnlPlayer = (ViewGroup) findViewById(R.id.pnl_player);
+        progress = findViewById(R.id.progress);
+        progress.setVisibility(View.GONE);
+        btnStart = findViewById(R.id.btn_start);
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,15 +38,21 @@ public class SampleActivity extends AppCompatActivity {
     }
 
     private void startVrix() {
+        progress.setVisibility(View.VISIBLE);
+        if (vrixManager != null) {
+            vrixManager.stop();
+        }
         vrixManager = new VrixManager();
         vrixManager.init(this, VRIX_URL, new CompletionListener() {
             @Override
             public void onSuccess() {
+                progress.setVisibility(View.GONE);
                 play();
             }
 
             @Override
             public void onFail() {
+                progress.setVisibility(View.GONE);
                 Toast.makeText(SampleActivity.this, "Init 오류", Toast.LENGTH_SHORT).show();
             }
         });
@@ -112,38 +100,3 @@ public class SampleActivity extends AppCompatActivity {
         }
     }
 }
-```
-
-#### VRiX Handling methods
-```java
-
-    /**
-     * Initialize
-     * @param context   Context
-     * @param url       Vrix URL
-     * @param listener  Callback
-     */
-    public void init(Context context, String url, CompletionListener listener)
-
-    /**
-     * Play Ads
-     * @param view      광고가 붙을 부모 ViewGroup
-     * @param listener  Callback
-     */
-    public void play(ViewGroup view, CompletionListener listener)
-
-    /**
-     * Activity or Flagment onResume 에서 호출
-     */
-    public void resume()
-
-    /**
-     * Activity or Flagment onPause 에서 호출
-     */
-    public void pause()
-
-    /**
-     * Activity or Flagment onStop 에서 호출
-     */
-    public void stop()
-```
