@@ -149,13 +149,13 @@ class com.gomcorp.vrix.android.VrixManager {
 }
 ```
 
-###License
-[![License][license-image]]
+## License
+
+![License][license-image]
 
 Gomcorp – (https://www.gomcorp.com/) – cilee@gomcorp.com
 
 Copyright © 2017 Gomcorp.
-
 
 
 [license-image]: https://img.shields.io/badge/License-MIT-blue.svg
