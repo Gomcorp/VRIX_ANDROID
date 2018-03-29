@@ -116,7 +116,7 @@ public class SampleActivity extends AppCompatActivity {
 
 #### VRiX Handling methods
 ```java
-
+class com.gomcorp.vrix.android.VrixManager {
     /**
      * Initialize
      * @param context   Context
@@ -146,4 +146,8 @@ public class SampleActivity extends AppCompatActivity {
      * Activity or Flagment onStop 에서 호출
      */
     public void stop()
+}
 ```
+
+
+
