@@ -16,7 +16,7 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
     private View progress;
     private View btnStart;
 
-    private static final String VRIX_URL = "http://ads.vrixon.com/vast/vast.vrix?invenid=KHLOC";
+    private static final String VRIX_URL = "http://devads.vrixon.com/vast/vast.vrix?invenid=KHLOC";
 //    private static final String VRIX_URL = "http://ads.vrixon.com/vast/vast.vrix?invenid=PEFOC";  //광고가 없는경우
 //    private static final String VRIX_URL = "http://ads.vrixon.com/vast/vast.vrix?invenid=XXXXXX";  // 잘못된 URL
 
@@ -25,6 +25,7 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sample);
 
+        vrixManager = new VrixManager();
         pnlPlayer = (ViewGroup) findViewById(R.id.pnl_player);
         progress = findViewById(R.id.progress);
         progress.setVisibility(View.GONE);
@@ -41,10 +42,6 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
 
     private void startVrix() {
         progress.setVisibility(View.VISIBLE);
-        if (vrixManager != null) {
-            vrixManager.stop();
-        }
-        vrixManager = new VrixManager();
         vrixManager.init(this, VRIX_URL, new CompletionListener() {
             @Override
             public void onSuccess() {

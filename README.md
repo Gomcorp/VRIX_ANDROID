@@ -24,7 +24,7 @@
 2. Add dependency in your build.gradle on module-level
 ```groovy
     dependencies {
-        implementation ('com.gomcorp.vrix.android:vrix:1.0.2@aar') {
+        implementation ('com.gomcorp.vrix.android:vrix:1.0.3@aar') {
             transitive = true
         }
     }
