@@ -9,7 +9,7 @@ import android.widget.Toast;
 import com.gomcorp.vrix.android.CompletionListener;
 import com.gomcorp.vrix.android.VrixManager;
 
-public class SampleActivity extends AppCompatActivity {
+public class SampleActivity extends AppCompatActivity implements View.OnClickListener {
 
     private VrixManager vrixManager;
     private ViewGroup pnlPlayer;
@@ -29,12 +29,14 @@ public class SampleActivity extends AppCompatActivity {
         progress = findViewById(R.id.progress);
         progress.setVisibility(View.GONE);
         btnStart = findViewById(R.id.btn_start);
-        btnStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startVrix();
-            }
-        });
+        btnStart.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == btnStart) {
+            startVrix();
+        }
     }
 
     private void startVrix() {
