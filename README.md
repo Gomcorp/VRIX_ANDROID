@@ -34,6 +34,8 @@
 ```
 <uses-permission android:name="android.permission.INTERNET" />
 ```
+## Release Note
+[Release Note](https://github.com/Gomcorp/VRIX_ANDROID/wiki/Release-Note)
 
 ## Usage example
 ```java
