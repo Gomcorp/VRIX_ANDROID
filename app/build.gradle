@@ -26,7 +26,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
-    implementation ('com.gomcorp.vrix.android:vrix:1.0.3.4@aar') {
+    implementation ('com.gomcorp.vrix.android:vrix:1.0.4@aar') {
         transitive = true
     }
 }
