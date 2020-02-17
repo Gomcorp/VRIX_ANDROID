@@ -1,13 +1,14 @@
 package com.gomcorp.vrix.sample;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.gomcorp.vrix.android.CompletionListener;
 import com.gomcorp.vrix.android.VrixManager;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class SampleActivity extends AppCompatActivity implements View.OnClickListener {
 
