@@ -24,7 +24,7 @@
 2. Add dependency in your build.gradle on module-level
 ```groovy
     dependencies {
-        implementation ('com.gomcorp.vrix.android:vrix:1.1.1@aar') {
+        implementation ('com.gomcorp.vrix.android:vrix:2.0.0@aar') {
             transitive = true
         }
     }
@@ -37,7 +37,122 @@
 ## Release Note
 [Release Note](https://github.com/Gomcorp/VRIX_ANDROID/wiki/Release-Note)
 
-## Usage example
+## Usage example V2
+2.0.0 부터 사용법이 변경 됨
+
+SampleActivityV2.java 파일 참고
+```java
+public class SampleActivityV2 extends AppCompatActivity implements View.OnClickListener {
+
+    private VrixPlayer vrixPlayer;
+    private ViewGroup pnlPlayer;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sample);
+        .....
+        btnStart.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == btnStart) {
+            startVrix();
+        }
+    }
+
+    private void startVrix() {
+        progress.setVisibility(View.VISIBLE);
+        if (vrixPlayer != null) {
+            vrixPlayer.release();
+            vrixPlayer = null;
+        }
+        vrixPlayer = new VrixPlayer(this, pnlPlayer, VRIX_URL);
+        vrixPlayer.init(new VrixInitCallback() {
+            @Override
+            public void onInitialized() {
+                progress.setVisibility(View.GONE);
+                play();
+            }
+
+            @Override
+            public void onFailed() {
+                progress.setVisibility(View.GONE);
+                Toast.makeText(SampleActivityV2.this, "Init 오류", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void play() {
+        vrixPlayer.playPreroll(new VrixAdCallback() {
+            @Override
+            public void onError() {
+                // 광고재생실패
+                // 메인영상 재생 시작
+                Toast.makeText(SampleActivityV2.this, "재생 실패", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdBreakStarted() {
+            }
+
+            @Override
+            public void onAdStarted(VrixAdItem vrixAdItem) {
+                Toast.makeText(SampleActivityV2.this, vrixAdItem.title + " 재생시작", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdCompleted(VrixAdItem vrixAdItem) {
+                Toast.makeText(SampleActivityV2.this, vrixAdItem.title + " 재생완료", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdBreakCompleted() {
+                // 광고재생완료
+                // 메인영상 재생 시작
+                Toast.makeText(SampleActivityV2.this, "광고 재생 완료", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (vrixPlayer != null) {
+            vrixPlayer.resume();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (vrixPlayer != null) {
+            vrixPlayer.pause();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (vrixPlayer != null) {
+            vrixPlayer.stop();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (vrixPlayer != null) {
+            vrixPlayer.release();
+            vrixPlayer = null;
+        }
+    }
+}
+```
+
+
+## Usage example V1.X.X
 ```java
 public class SampleActivity extends AppCompatActivity {
 
@@ -113,41 +228,6 @@ public class SampleActivity extends AppCompatActivity {
             vrixManager.stop();
         }
     }
-}
-```
-
-#### VRiX Handling methods
-```java
-class com.gomcorp.vrix.android.VrixManager {
-    /**
-     * Initialize
-     * @param context   Context
-     * @param url       Vrix URL
-     * @param listener  Callback
-     */
-    public void init(Context context, String url, CompletionListener listener)
-
-    /**
-     * Play Ads
-     * @param view      광고가 붙을 부모 ViewGroup
-     * @param listener  Callback
-     */
-    public void play(ViewGroup view, CompletionListener listener)
-
-    /**
-     * Activity or Flagment onResume 에서 호출
-     */
-    public void resume()
-
-    /**
-     * Activity or Flagment onPause 에서 호출
-     */
-    public void pause()
-
-    /**
-     * Activity or Flagment onStop 에서 호출
-     */
-    public void stop()
 }
 ```
 
