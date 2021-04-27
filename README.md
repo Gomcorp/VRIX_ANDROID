@@ -34,6 +34,11 @@
 ```
 <uses-permission android:name="android.permission.INTERNET" />
 ```
+
+4. proguard 설정
+[link](https://github.com/Gomcorp/VRIX_ANDROID/blob/master/app/proguard-rules.pro)
+
+
 ## Release Note
 [Release Note](https://github.com/Gomcorp/VRIX_ANDROID/wiki/Release-Note)
 
