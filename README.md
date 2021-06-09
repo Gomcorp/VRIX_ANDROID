@@ -11,6 +11,7 @@
 
 ## Installation
 1. aar 파일을 libs 폴더에 추가
+[download](https://github.com/Gomcorp/VRIX_ANDROID/blob/master/app/libs/vrix-2.1.0.aar)
 
 ![libs](https://user-images.githubusercontent.com/31840071/121276972-9f09af00-c90a-11eb-9a23-d1d38350b62e.png)
 
