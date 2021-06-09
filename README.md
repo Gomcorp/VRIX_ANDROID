@@ -10,19 +10,21 @@
 - Installed "Google Play Service"
 
 ## Installation
-1. aar 파일을 libs 폴더에 추가
-[download](https://github.com/Gomcorp/VRIX_ANDROID/blob/master/app/libs/vrix-2.1.0.aar)
+1. aar 파일을 libs 폴더에 추가   
+[download](https://github.com/Gomcorp/VRIX_ANDROID/blob/master/app/libs)
 
 ![libs](https://user-images.githubusercontent.com/31840071/121276972-9f09af00-c90a-11eb-9a23-d1d38350b62e.png)
 
 
-2. vrix에서 사용하는 라이브러리를 dependency 에 추가해야 합니다.
+2. vrix에서 사용하는 라이브러리를 dependency 에 추가해야 합니다.   
 app 레밸의 build.gradle에 추가해 줍니다.
 
 ![dependencies](https://user-images.githubusercontent.com/31840071/121276969-9dd88200-c90a-11eb-9a61-ebf310415c51.png)
 
 ```groovy
     dependencies {
+        implementation fileTree(dir: "libs", include: ["*.jar", "*.aar"])
+
         implementation 'com.squareup.retrofit2:retrofit:2.6.2'
         implementation ('com.squareup.retrofit2:converter-simplexml:2.6.2'){
             exclude group: 'xpp3', module: 'xpp3'
