@@ -11,6 +11,7 @@ import com.gomcorp.vrix.VrixAdCallback;
 import com.gomcorp.vrix.VrixAdItem;
 import com.gomcorp.vrix.VrixInitCallback;
 import com.gomcorp.vrix.VrixPlayer;
+import com.gomcorp.vrix.ExtensionIconAction;
 
 /**
  * vrix version 2.x.x 용
@@ -95,6 +96,19 @@ public class SampleActivityV2 extends AppCompatActivity implements View.OnClickL
                 // 광고재생완료
                 // 메인영상 재생 시작
                 Toast.makeText(SampleActivityV2.this, "광고 재생 완료", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdClicked(VrixAdItem vrixAdItem) {
+
+            }
+
+            @Override
+            public void onAdSkipped(VrixAdItem vrixAdItem) {
+            }
+
+            @Override
+            public void onExtensionIconClick(ExtensionIconAction d) {
             }
         });
     }

@@ -26,12 +26,6 @@
 -dontwarn okio.**
 -dontwarn javax.annotation.**
 
--keep interface com.gomcorp.vrix.util.KeepName
--keepnames @com.gomcorp.vrix.util.KeepName class *
--keepclassmembernames class * {
-    @com.gomcorp.vrix.util.KeepName *;
-}
-
 ### OKHTTP
 
 # Platform calls Class.forName on types which do not exist on Android to determine platform.
