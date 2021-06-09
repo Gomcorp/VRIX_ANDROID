@@ -183,7 +183,7 @@ public class SampleActivityV2 extends AppCompatActivity implements View.OnClickL
 
 ![License][license-image]
 
-Gomcorp – (https://www.gomcorp.com/) – cilee@gomcorp.com
+Gomcorp – (https://www.gomcorp.com/) – nsd8352@gomcorp.com
 
 Copyright © 2017 Gomcorp.
 
