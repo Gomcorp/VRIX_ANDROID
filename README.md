@@ -10,27 +10,33 @@
 - Installed "Google Play Service"
 
 ## Installation
-1. Add repository in your build.gradle on project-level
-```groovy
-    allprojects {
-        repositories {
-            maven {
-                url  "https://dl.bintray.com/gomcorp/maven/"
-            }
-        }
-    }
-```
+1. aar 파일을 libs 폴더에 추가
 
-2. Add dependency in your build.gradle on module-level
+![libs](https://user-images.githubusercontent.com/31840071/121276972-9f09af00-c90a-11eb-9a23-d1d38350b62e.png)
+
+
+2. vrix에서 사용하는 라이브러리를 dependency 에 추가해야 합니다.
+app 레밸의 build.gradle에 추가해 줍니다.
+
+![dependencies](https://user-images.githubusercontent.com/31840071/121276969-9dd88200-c90a-11eb-9a61-ebf310415c51.png)
+
 ```groovy
     dependencies {
-        implementation ('com.gomcorp.vrix.android:vrix:2.0.0@aar') {
-            transitive = true
+        implementation 'com.squareup.retrofit2:retrofit:2.6.2'
+        implementation ('com.squareup.retrofit2:converter-simplexml:2.6.2'){
+            exclude group: 'xpp3', module: 'xpp3'
+            exclude group: 'stax', module: 'stax-api'
+            exclude group: 'stax', module: 'stax'
         }
+        implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
+        implementation 'com.google.android.gms:play-services-ads-identifier:17.0.1'
+
+        implementation 'com.squareup.picasso:picasso:2.71828'
+        implementation 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0'
     }
 ```
 
-3. Add permission in your AndroidManifest.xml
+3. AndroidManifest.xml 에 퍼미션을 추가합니다.
 ```
 <uses-permission android:name="android.permission.INTERNET" />
 ```
@@ -118,6 +124,19 @@ public class SampleActivityV2 extends AppCompatActivity implements View.OnClickL
                 // 메인영상 재생 시작
                 Toast.makeText(SampleActivityV2.this, "광고 재생 완료", Toast.LENGTH_SHORT).show();
             }
+
+            @Override
+            public void onAdClicked(VrixAdItem vrixAdItem) {
+            }
+
+            @Override
+            public void onAdSkipped(VrixAdItem vrixAdItem) {
+            }
+
+            @Override
+            public void onExtensionIconClick(ExtensionIconAction d) {
+                // Noting To do, 무시해주세요.
+            }
         });
     }
 
@@ -156,85 +175,6 @@ public class SampleActivityV2 extends AppCompatActivity implements View.OnClickL
 }
 ```
 
-
-## Usage example V1.X.X
-```java
-public class SampleActivity extends AppCompatActivity {
-
-    private ViewGroup pnlPlayer;
-    private VrixManager vrixManager;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sample);
-        ....
-        btnStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startVrix();
-            }
-        });
-    }
-
-    private void startVrix() {
-        vrixManager = new VrixManager();
-        vrixManager.init(this, VRIX_URL, new CompletionListener() {
-            @Override
-            public void onSuccess() {
-                play();
-            }
-
-            @Override
-            public void onFail() {
-                Toast.makeText(SampleActivity.this, "Init 오류", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void play() {
-        vrixManager.play(pnlPlayer, new CompletionListener() {
-            @Override
-            public void onSuccess() {
-                // 광고재생완료
-                // 메인영상 재생 시작
-                Toast.makeText(SampleActivity.this, "재생 완료", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFail() {
-                // 광고재생실패
-                // 메인영상 재생 시작
-                Toast.makeText(SampleActivity.this, "재생 실패", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (vrixManager != null) {
-            vrixManager.resume();
-        }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (vrixManager != null) {
-            vrixManager.pause();
-        }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (vrixManager != null) {
-            vrixManager.stop();
-        }
-    }
-}
-```
 
 ## License
 
